@@ -1,0 +1,50 @@
+---
+// Llamada a la acción partida 50/50 a sangre: foto que toca el borde izquierdo y, a la derecha, banda del color
+// de acento con título grande y dos botones. Sin foto, la banda ocupa todo el ancho.
+// Campos: antetitulo, titulo, texto, imagen, cta, cta_secundario.
+import { seccion, numeroSeccion } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const num = numeroSeccion(id);
+---
+
+{
+  s && (
+    <section id={id} class:list={['banda-acento grid', s.imagen && 'lg:grid-cols-2']}>
+      {s.imagen && (
+        <div class="relative min-h-[15rem] overflow-hidden sm:min-h-[22rem] lg:min-h-[34rem]">
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} respaldo="/placeholders/obra.svg" class="absolute inset-0 h-full w-full object-cover" />
+        </div>
+      )}
+      <div class:list={['flex items-center px-4 py-16 sm:px-8 md:py-24', s.imagen ? 'lg:px-16' : 'contenedor']}>
+        <div class="max-w-[44rem]">
+          {(s.antetitulo || num) && (
+            <p class="cta-rotulo">
+              {num && <span class="opacity-60">{num} /</span>}
+              {s.antetitulo && <span>{s.antetitulo}</span>}
+            </p>
+          )}
+          {s.titulo && <h2 class="mt-5 text-[clamp(2.25rem,5vw,4.5rem)]">{s.titulo}</h2>}
+          {s.texto && <p class="mt-6 max-w-xl text-lg opacity-85">{s.texto}</p>}
+          {(s.cta?.url || s.cta_secundario?.url) && (
+            <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {s.cta?.url && <a class="cta-boton btn" href={s.cta.url}>{s.cta.texto}<Icono nombre="flecha" tam={18} class="flecha" /></a>}
+              {s.cta_secundario?.url && <a class="btn-sec" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .cta-rotulo { display: flex; gap: .75rem; align-items: center; font-family: var(--fuente-tecnica); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .cta-rotulo::before { content: ""; width: .8rem; height: .8rem; background: currentColor; }
+  .cta-boton { background: var(--c-grafito); border-color: var(--c-grafito); }
+  .cta-boton:hover { box-shadow: 5px 5px 0 #fff; }
+</style>

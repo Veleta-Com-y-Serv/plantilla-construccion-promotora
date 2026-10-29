@@ -1,0 +1,22 @@
+---
+// Titular de sección (número + antetítulo + título + texto). Adaptado de AstroWind (Headline.astro), © onWidget, MIT.
+// `numero` («01», «02»…) sale del orden de la sección en la página (numeroSeccion de src/data/site.ts).
+interface Props { titulo?: string; antetitulo?: string; texto?: string; numero?: string; alinear?: 'izquierda' | 'centro'; class?: string; nivel?: 1 | 2 }
+const { titulo, antetitulo, texto, numero = '', alinear = 'izquierda', class: clase = '', nivel = 2 } = Astro.props;
+const H = nivel === 1 ? 'h1' : 'h2';
+---
+
+{
+  (titulo || antetitulo || texto) && (
+    <div class:list={['titular', { 'titular--centro': alinear === 'centro' }, clase]}>
+      {(antetitulo || numero) && (
+        <p class="rotulo">
+          {numero && <span class="rotulo-num">{numero}</span>}
+          {antetitulo && <span>{antetitulo}</span>}
+        </p>
+      )}
+      {titulo && <H class="titulo-seccion">{titulo}</H>}
+      {texto && <p class="titular-texto">{texto}</p>}
+    </div>
+  )
+}

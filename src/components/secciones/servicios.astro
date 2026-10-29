@@ -1,0 +1,53 @@
+---
+// Servicios: banda de hormigón visto. Arriba, fila 50/50 con la foto a sangre a la izquierda (toca el borde)
+// y el titular a la derecha; debajo, los servicios como «pilares» en 4 columnas con viga de acero arriba,
+// número, icono en bloque, título y texto. Campos: imagen (opcional), items[] {titulo, texto, icono}.
+import { seccion, numeroSeccion } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class="hormigon">
+      <div class:list={['grid', s.imagen && 'lg:grid-cols-2']}>
+        {s.imagen && (
+          <div class="relative min-h-[15rem] overflow-hidden sm:min-h-[22rem] lg:min-h-[32rem]">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} respaldo="/placeholders/obra.svg" class="absolute inset-0 h-full w-full object-cover" />
+          </div>
+        )}
+        <div class:list={['flex items-center px-4 py-14 sm:px-8 md:py-20', s.imagen ? 'lg:px-16' : 'contenedor']}>
+          <Titular class="mb-0" numero={numeroSeccion(id)} antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        </div>
+      </div>
+      {items.length > 0 && (
+        <div class="contenedor pb-16 md:pb-24">
+          <ul class="servicios-pilares grid gap-x-8 gap-y-12 pt-4 sm:grid-cols-2 lg:grid-cols-4">
+            {items.map((it, i) => (
+              <li class="pilar">
+                <div class="flex items-center justify-between">
+                  <span class="icono-bloque"><Icono nombre={it.icono || 'edificio'} tam={24} /></span>
+                  <span class="dato-tecnico opacity-60">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h3 class="mt-8 text-2xl leading-none md:text-[1.75rem]">{it.titulo}</h3>
+                {it.texto && <p class="mt-4 text-[var(--c-tenue)]">{it.texto}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .pilar { position: relative; padding-top: 2rem; border-top: 8px solid var(--c-primario); }
+  .pilar::before { content: ""; position: absolute; left: 0; top: -8px; width: 33%; height: 8px; background: var(--c-acento); }
+  .servicios-pilares { margin-top: 1rem; }
+</style>

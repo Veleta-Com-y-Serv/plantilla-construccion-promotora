@@ -1,0 +1,144 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+nombre: Esgueva Obras y Promociones
+eslogan: Constructora y promotora de viviendas en Valladolid.
+sector: construccion
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = inicial + nombre en texto.
+colores:
+  primario: "#244765"
+  acento: "#6aa6dc"
+  fondo: "#ffffff"
+  texto: "#16191d"
+contacto:
+  telefono: "983 41 27 65"
+  email: hola@esguevaobras.es
+  direccion: "Paseo de Zorrilla 112, 1.º, 47006 Valladolid"
+  horario: Lunes a jueves de 8:30 a 14:00 y de 16:00 a 19:00. Viernes de 8:30 a 15:00.
+  whatsapp: "+34 646 27 41 90"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: ""
+  linkedin: https://www.linkedin.com/
+menu:
+  - { texto: Promociones, url: "/#promociones" }
+  - { texto: Servicios, url: "/#servicios" }
+  - { texto: Proyectos, url: "/#trabajos" }
+  - { texto: Empresa, url: "/#equipo" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Pide información, url: "/#contacto" }
+seo:
+  titulo: Esgueva Obras y Promociones · Constructora en Valladolid
+  descripcion: Obra nueva, construcción para terceros y rehabilitación de edificios en Valladolid. Promociones de pisos y pareados con entrega en plazo.
+  tipo: GeneralContractor   # tipo de schema.org
+marca_pie: true   # «Web creada con NoExpertise» en el pie
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Constructora y promotora en Valladolid desde 1998
+    titulo: Construimos edificios que duran
+    texto: Promovemos viviendas propias, construimos para empresas y particulares y rehabilitamos edificios. Con jefe de obra fijo y plazos por escrito.
+    imagen: /fotos/hero.jpg
+    cta: { texto: Ver promociones, url: "/#promociones" }
+    cta_secundario: { texto: Construir con nosotros, url: "/#servicios" }
+    items:   # accesos de la franja inferior (titulo, texto, url)
+      - { titulo: Obra nueva, texto: Promociones propias en Valladolid y alrededores, url: "/#promociones" }
+      - { titulo: Construcción, texto: "Edificios, viviendas y naves para terceros", url: "/#servicios" }
+      - { titulo: Rehabilitación, texto: "Fachadas, cubiertas y accesibilidad", url: "/#servicios" }
+
+  promociones:
+    activa: true
+    antetitulo: Promociones
+    titulo: Viviendas a la venta
+    texto: Pisos y pareados que construimos nosotros, con memoria de calidades cerrada desde el primer día. Visita la obra con cita.
+    cta: { texto: Pedir información, url: "/#contacto" }
+    promociones:
+      - { titulo: Residencial Ribera de Moreras, lugar: "Valladolid · Las Moreras", estado: En construcción, precio: "Desde 214.000 €", viviendas: 36 viviendas, tipologia: "2 y 3 dormitorios con garaje y trastero", texto: "A dos minutos del Pisuerga. Aerotermia, suelo radiante y piscina comunitaria.", imagen: /fotos/promocion-moreras.jpg, destacado: true }
+      - { titulo: Jardines de Covaresa, lugar: "Valladolid · Covaresa", estado: Entrega 2027, precio: "Desde 289.000 €", viviendas: 18 viviendas, tipologia: Pareados de 4 dormitorios con parcela, texto: "Dos plantas y bajo cubierta, jardín privado y cargador para coche eléctrico.", imagen: /fotos/promocion-covaresa.jpg, destacado: false }
+      - { titulo: Edificio Arroyo Centro, lugar: Arroyo de la Encomienda, estado: Disponible, precio: "Desde 176.000 €", viviendas: 24 viviendas, tipologia: "1 a 3 dormitorios con terraza", texto: "Terminado y con licencia de primera ocupación. Quedan pocas viviendas, visita el piso piloto.", imagen: /fotos/promocion-arroyo.jpg, destacado: false }
+
+  servicios:
+    activa: true
+    antetitulo: Servicios
+    titulo: De la licencia a la entrega de llaves
+    texto: "Somos promotora y constructora a la vez: un solo equipo, un solo responsable y un precio cerrado antes de empezar."
+    imagen: /fotos/servicios.jpg
+    items:
+      - { titulo: Promoción inmobiliaria, texto: "Buscamos suelo, diseñamos con el arquitecto y vendemos sobre plano con avales.", icono: edificio }
+      - { titulo: Construcción para terceros, texto: "Viviendas unifamiliares, edificios y naves con proyecto de tu arquitecto o del nuestro.", icono: grua }
+      - { titulo: Rehabilitación de edificios, texto: "Fachadas, cubiertas, ascensores y eficiencia energética para comunidades.", icono: casco }
+      - { titulo: Obra industrial, texto: "Naves, oficinas y adecuación de locales con la actividad en marcha.", icono: ladrillos }
+
+  trabajos:
+    activa: true
+    antetitulo: Proyectos
+    titulo: Obra terminada
+    texto: Algunas obras de los últimos años en Valladolid y su alfoz.
+    trabajos:
+      - { titulo: Edificio de 42 viviendas, lugar: "Valladolid · Parquesol", anio: "2024", categoria: Obra nueva, texto: "Seis plantas, garaje en dos sótanos y certificación energética A.", imagen: /fotos/trabajo-parquesol.jpg }
+      - { titulo: Rehabilitación de fachada y cubierta, lugar: "Valladolid · Centro", anio: "2023", categoria: Rehabilitación, texto: "Edificio de 1958: fachada ventilada, cubierta nueva y ascensor a cota cero.", imagen: /fotos/trabajo-rehabilitacion.jpg }
+      - { titulo: Nave logística, lugar: Polígono de San Cristóbal, anio: "2023", categoria: Industrial, texto: "4.800 m² con muelles de carga y oficinas en entreplanta.", imagen: /fotos/trabajo-nave.jpg }
+      - { titulo: Vivienda unifamiliar, lugar: Simancas, anio: "2022", categoria: Obra nueva, texto: "Casa de una planta con estructura de hormigón y patio interior.", imagen: /fotos/trabajo-simancas.jpg }
+      - { titulo: Ampliación de un colegio, lugar: "Valladolid · La Rubia", anio: "2024", categoria: Equipamientos, texto: "Seis aulas nuevas construidas durante el verano, sin cortar el curso.", imagen: /fotos/trabajo-colegio.jpg }
+      - { titulo: Pareados con jardín, lugar: Zaratán, anio: "2021", categoria: Obra nueva, texto: "Doce viviendas pareadas entregadas un mes antes de plazo.", imagen: /fotos/trabajo-zaratan.jpg }
+
+  cifras:
+    activa: true
+    antetitulo: En números
+    titulo: Casi treinta años levantando Valladolid
+    items:
+      - { titulo: "28", texto: años de obra en Valladolid }
+      - { titulo: "1.450", texto: viviendas entregadas }
+      - { titulo: "62", texto: edificios rehabilitados }
+      - { titulo: "10 años", texto: de seguro decenal en cada estructura }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo trabajamos
+    titulo: Una obra sin sorpresas
+    texto: Cinco fases con fecha. En cada una sabes qué se hace, quién lo hace y cuánto cuesta.
+    items:
+      - { titulo: Estudio, texto: "Visitamos el solar o el edificio y te decimos qué se puede hacer.", icono: lupa }
+      - { titulo: Proyecto y licencias, texto: "Proyecto, presupuesto cerrado y trámites con el ayuntamiento.", icono: plano }
+      - { titulo: Obra, texto: "Un jefe de obra fijo y un informe con fotos cada semana.", icono: grua }
+      - { titulo: Control de calidad, texto: "Ensayos de materiales e inspección independiente en cada fase.", icono: escudo }
+      - { titulo: Entrega y posventa, texto: "Llaves, documentación y un año de atención directa tras la entrega.", icono: llave }
+
+  equipo:
+    activa: true
+    antetitulo: Empresa
+    titulo: El equipo que firma cada obra
+    texto: Técnicos y encargados de plantilla, sin cambiar de interlocutor a mitad de obra.
+    personas:
+      - { nombre: Ignacio Herrero, cargo: Director y arquitecto técnico, foto: /placeholders/persona.svg, texto: Fundó la empresa y revisa cada presupuesto. }
+      - { nombre: Beatriz Lobato, cargo: Jefa de obra, foto: /placeholders/persona.svg, texto: Coordina gremios y plazos en las obras de vivienda. }
+      - { nombre: Rubén Calvo, cargo: Promociones y ventas, foto: /placeholders/persona.svg, texto: "Te enseña la obra, el piso piloto y la memoria de calidades." }
+      - { nombre: Sonia Pastor, cargo: Posventa, foto: /placeholders/persona.svg, texto: Atiende cualquier incidencia después de la entrega. }
+
+  cta:
+    activa: true
+    antetitulo: ¿Tienes un proyecto?
+    titulo: Un solar, una casa o un edificio que rehabilitar
+    texto: Cuéntanos qué tienes en mente. Un técnico lo estudia y te da un presupuesto cerrado en dos semanas.
+    imagen: /fotos/cta-obra.jpg
+    cta: { texto: Hablar con un técnico, url: "/#contacto" }
+    cta_secundario: { texto: Ver proyectos, url: "/#trabajos" }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que nos preguntan antes de firmar
+    preguntas:
+      - { pregunta: "¿Mi dinero está protegido si compro sobre plano?", respuesta: "Sí. Las cantidades que entregas antes de la llave van a una cuenta especial y están avaladas por un banco, como marca la ley." }
+      - { pregunta: "¿Puedo cambiar acabados de mi vivienda?", respuesta: "Sí, mientras la obra lo permita. Te damos opciones de suelos, cocina y baños sin coste y presupuestamos aparte lo que quieras añadir." }
+      - { pregunta: "¿Construís con el proyecto de mi arquitecto?", respuesta: "Claro. Estudiamos el proyecto, te damos un presupuesto cerrado partida a partida y coordinamos la obra con tu dirección facultativa." }
+      - { pregunta: "¿Qué garantías tiene la obra?", respuesta: "Un año para acabados, tres para instalaciones y diez para la estructura, con seguro decenal. Posventa directa con nosotros." }
+      - { pregunta: "¿Rehabilitáis edificios con vecinos dentro?", respuesta: "Sí. Planificamos la obra por fases, protegemos zonas comunes y avisamos de cada corte con antelación." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Hablemos de tu obra
+    texto: Te llamamos en el día. También puedes venir a la oficina o visitar el piso piloto con cita.
+    opciones: "Comprar una vivienda; Construir mi casa; Rehabilitar un edificio; Obra industrial; Otra consulta"   # «Me interesa» del formulario, separadas por «;» (vacío = accesos de la portada)

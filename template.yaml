@@ -1,0 +1,92 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: construccion-promotora
+nombre: Construcción y promotora
+descripcion: Web rotunda para constructoras y promotoras, con promociones en venta, obra terminada y cifras.
+sectores:
+  - { id: construccion, nombre: Construcción }
+  - { id: promotora, nombre: Promotora inmobiliaria }
+  - { id: obra-nueva, nombre: Obra nueva }
+  - { id: ingenieria, nombre: Ingeniería }
+  - { id: aparejador, nombre: Aparejador y arquitecto técnico }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: promociones, nombre: Promociones }
+  - { id: servicios, nombre: Servicios }
+  - { id: trabajos, nombre: Proyectos }
+  - { id: cifras, nombre: Cifras }
+  - { id: proceso, nombre: Cómo trabajamos }
+  - { id: equipo, nombre: Equipo }
+  - { id: cta, nombre: Llamada a la acción }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: solido
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-construccion-promotora.noexpertise.com
+activa: true
+orden: 370
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu empresa"
+    pregunta: "¿Cómo se llama tu empresa y qué hacéis: promover, construir, rehabilitar…?"
+    ayuda: "Cuéntame también en qué ciudad o comarca trabajáis y desde cuándo."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde está la oficina y cómo os pueden llamar o escribir?"
+    ayuda: "Solo lo que quieras que vean tus clientes. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.linkedin]
+  - id: promociones
+    titulo: "Tus promociones"
+    pregunta: "¿Qué promociones tenéis ahora a la venta? Una por línea: nombre, dónde, cuántas viviendas y en qué estado está."
+    ayuda: "El precio solo si quieres enseñarlo. Las fotos las pones luego en Contenido."
+    tipo: lista
+    campos: [secciones.promociones.promociones]
+  - id: servicios
+    titulo: "Qué hacéis"
+    pregunta: "¿Qué servicios dais? Uno por línea, como se lo dirías a un cliente."
+    tipo: texto
+    campos: [secciones.servicios.titulo, secciones.servicios.texto, secciones.servicios.items]
+  - id: trabajos
+    titulo: "Obra terminada"
+    pregunta: "Cuéntame algunas obras que hayáis terminado: qué, dónde y en qué año. Una por línea."
+    ayuda: "Las fotos de cada obra las pones luego en Contenido."
+    tipo: lista
+    campos: [secciones.trabajos.trabajos]
+  - id: proceso
+    titulo: "Cómo trabajáis"
+    pregunta: "¿Cómo es una obra con vosotros, desde la primera visita hasta la entrega?"
+    tipo: texto
+    campos: [secciones.proceso.titulo, secciones.proceso.texto, secciones.proceso.items]
+  - id: equipo
+    titulo: "Tu equipo"
+    pregunta: "¿Quién forma el equipo? Nombre y qué hace cada uno, uno por línea."
+    ayuda: "Las fotos las pones luego en Contenido."
+    tipo: lista
+    campos: [secciones.equipo.personas]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan siempre antes de comprar o de encargar una obra? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Es lo que citan Google y los asistentes cuando alguien pregunta por tu sector."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, las de servicios y la llamada final."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.servicios.imagen, secciones.cta.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

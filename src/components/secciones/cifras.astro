@@ -1,0 +1,45 @@
+---
+// Cifras: banda de acero a todo el ancho con textura de encofrado; cifras enormes en palo seco negro separadas
+// por filetes verticales, con su etiqueta en monoespaciada. Campos: items[] {titulo = la cifra, texto}.
+// Sin cifras no se pinta (la plataforma no las inventa: salen vacías hasta que el cliente pone las suyas).
+import { seccion, numeroSeccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && items.length > 0 && (
+    <section id={id} class="banda-acero fondo-oscuro relative isolate overflow-hidden">
+      <div class="hormigon-oscuro absolute inset-0 -z-10 opacity-70" aria-hidden="true" />
+      <div class="contenedor py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+        <Titular class="mb-12 md:mb-16" numero={numeroSeccion(id)} antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <dl class="cifras grid grid-cols-2 lg:grid-cols-4">
+          {items.map((it) => (
+            <div class="cifra">
+              <dt class="sr-only">{it.texto || it.titulo}</dt>
+              <dd>
+                <span class="cifra-valor block">{it.titulo}</span>
+                {it.texto && <span class="dato-tecnico mt-3 block uppercase text-white/80" aria-hidden="true">{it.texto}</span>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <div class="h-3 bg-acento" aria-hidden="true" />
+    </section>
+  )
+}
+
+<style>
+  .cifra { padding: 1.5rem 1rem 1.5rem 0; border-top: 2px solid rgb(255 255 255 / .25); }
+  .cifra:nth-child(2n) { padding-left: 1rem; border-left: 1px solid rgb(255 255 255 / .18); }
+  .cifra-valor { font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(2.4rem, 5.2vw, 4.9rem); line-height: .9; letter-spacing: -0.05em; color: #fff; overflow-wrap: normal; word-break: keep-all; }
+  @media (min-width: 1024px) {
+    .cifra { padding: 2rem 2rem 0 2rem; border-top: 0; border-left: 1px solid rgb(255 255 255 / .18); }
+    .cifra:first-child { padding-left: 0; border-left: 0; }
+    .cifra:nth-child(2n) { padding-left: 2rem; }
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+// Portada a sangre casi a pantalla completa: foto de obra con velo grafito, título enorme en palo seco negro,
+// texto corto y dos botones. Abajo, franja de acero a todo el ancho con los accesos (items: titulo, texto, url),
+// numerados como en un plano. Sin foto: grafito con textura de hormigón. Sin accesos: no hay franja.
+import { seccion } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const accesos = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class="hero-obra fondo-oscuro relative isolate flex flex-col overflow-hidden bg-[var(--c-grafito)] text-white">
+      {s.imagen ? (
+        <Imagen src={s.imagen} alt={altHero()} ancho={2100} alto={900} prioridad={primera} respaldo="/placeholders/hero.svg" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+      ) : (
+        <div class="hormigon-oscuro absolute inset-0 -z-10" aria-hidden="true" />
+      )}
+      <div class="hero-obra-velo absolute inset-0 -z-10" aria-hidden="true" />
+      <div class="contenedor flex flex-1 flex-col justify-end pb-12 pt-20 md:pb-16 md:pt-28 lg:pb-20">
+        {s.antetitulo && <p class="rotulo">{s.antetitulo}</p>}
+        {s.titulo && <h1 class="hero-obra-titulo mt-6 max-w-[14ch] text-white">{s.titulo}</h1>}
+        <div class="mt-8 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          {s.texto && <p class="max-w-xl text-lg text-white/85 md:text-xl">{s.texto}</p>}
+          {(s.cta?.url || s.cta_secundario?.url) && (
+            <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {s.cta?.url && <a class="btn-acento" href={s.cta.url}>{s.cta.texto}<Icono nombre="flecha" tam={18} class="flecha" /></a>}
+              {s.cta_secundario?.url && <a class="btn-sec text-white" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+            </div>
+          )}
+        </div>
+      </div>
+      {accesos.length > 0 && (
+        <nav class="banda-acero relative" aria-label={s.titulo || s.antetitulo || undefined}>
+          <ul class="contenedor hero-obra-accesos grid">
+            {accesos.map((a, i) => {
+              const Etiqueta = a.url ? 'a' : 'div';
+              return (
+                <li class="hero-obra-acceso">
+                  <Etiqueta href={a.url || undefined} class="group flex h-full items-start gap-5 py-6 no-underline md:py-8">
+                    <span class="dato-tecnico pt-1 text-acento">{String(i + 1).padStart(2, '0')}</span>
+                    <span class="min-w-0 flex-1">
+                      <span class="block font-display text-xl font-black uppercase tracking-tight md:text-2xl">{a.titulo}</span>
+                      {a.texto && <span class="mt-1 block text-sm text-white/75">{a.texto}</span>}
+                    </span>
+                    {a.url && <Icono nombre="flecha" tam={22} class="mt-1 shrink-0 text-acento transition-transform group-hover:translate-x-1" />}
+                  </Etiqueta>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .hero-obra { min-height: calc(92svh - 4.75rem); }
+  .hero-obra-velo {
+    background:
+      linear-gradient(0deg, color-mix(in srgb, var(--c-grafito) 92%, transparent) 0%, color-mix(in srgb, var(--c-grafito) 55%, transparent) 45%, color-mix(in srgb, var(--c-grafito) 15%, transparent) 100%),
+      linear-gradient(90deg, color-mix(in srgb, var(--c-grafito) 55%, transparent), transparent 70%);
+  }
+  .hero-obra-titulo { font-size: clamp(2.6rem, 8.2vw, 7.25rem); line-height: .92; letter-spacing: -0.045em; }
+  .hero-obra-acceso + .hero-obra-acceso { border-top: 1px solid rgb(255 255 255 / .15); }
+  @media (min-width: 1024px) {
+    .hero-obra-accesos { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+    .hero-obra-acceso + .hero-obra-acceso { border-top: 0; border-left: 1px solid rgb(255 255 255 / .15); padding-left: 2rem; }
+    .hero-obra-acceso:not(:last-child) { padding-right: 2rem; }
+  }
+</style>

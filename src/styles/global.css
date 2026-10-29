@@ -1,0 +1,135 @@
+/* Construcción y promotora — estilo sólido: hormigón visto + azul acero + blanco.
+   Bandas a sangre (grafito, hormigón con berenjenos, acero, blanco), títulos en palo seco negro (Arial Black),
+   rótulos técnicos en monoespaciada, esquinas vivas, botones macizos con sombra de bloque. */
+@import "tailwindcss";
+@import "./comun.css";
+@config "../../tailwind.config.mjs";
+
+:root {
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fuente-titulos: "Arial Black", "Arial Nova Black", "Segoe UI Black", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --fuente-tecnica: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radio: 0px; --ritmo: 4.5rem; --ritmo-md: 7rem; --ancho: 90rem;
+  /* Derivados de los cuatro colores de site.yaml (siguen funcionando si el cliente los cambia) */
+  --c-grafito: color-mix(in srgb, var(--c-texto) 90%, var(--c-primario));          /* bandas oscuras y pie */
+  --c-grafito-2: color-mix(in srgb, var(--c-texto) 78%, var(--c-primario));
+  --c-hormigon: color-mix(in srgb, var(--c-texto) 8%, var(--c-fondo));               /* hormigón claro */
+  --c-hormigon-2: color-mix(in srgb, var(--c-texto) 15%, var(--c-fondo));
+  --c-acero-oscuro: color-mix(in srgb, var(--c-primario) 78%, #000);
+  --c-acento-texto: color-mix(in srgb, var(--c-acento) 52%, var(--c-texto));        /* acento legible sobre claro */
+  --c-borde: color-mix(in srgb, var(--c-texto) 16%, transparent);
+  --c-tenue: color-mix(in srgb, var(--c-texto) 72%, var(--c-fondo));
+  /* Texto sobre el acento: oscuro por defecto; si el navegador sabe, blanco o negro según la luz del acento. */
+  --c-sobre-acento: #111418;
+}
+@supports (color: oklch(from red l c h)) {
+  :root { --c-sobre-acento: oklch(from var(--c-acento) clamp(0, (0.66 - l) * 1000, 1) 0 0); }
+}
+
+@layer base {
+  html { scroll-padding-top: 5rem; }
+  body { font-family: var(--fuente-texto); font-size: 1.0625rem; line-height: 1.6; background: var(--c-fondo); }
+  h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 900; letter-spacing: -0.035em; line-height: .98; }
+}
+
+@layer components {
+  /* Rótulo técnico: número de sección + antetítulo en monoespaciada, con un sillar de acero delante */
+  .rotulo { display: flex; align-items: center; gap: .75rem; font-family: var(--fuente-tecnica); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--c-acento-texto); }
+  .rotulo::before { content: ""; flex: none; width: .8rem; height: .8rem; background: var(--c-acento); }
+  .rotulo-num { color: var(--c-texto); }
+  .rotulo-num::after { content: "/"; margin-left: .75rem; opacity: .4; }
+  .antetitulo { font-family: var(--fuente-tecnica); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--c-acento-texto); }
+  .titulo-seccion { font-size: clamp(2.25rem, 5.2vw, 4.75rem); margin-top: 1rem; color: var(--c-texto); }
+  .titular { max-width: 56rem; margin-bottom: 3rem; }
+  .titular--centro { margin-inline: auto; text-align: center; }
+  .titular--centro .rotulo { justify-content: center; }
+  .titular-texto { margin-top: 1.25rem; max-width: 40rem; font-size: 1.125rem; color: var(--c-tenue); }
+  .fondo-oscuro { color: #fff; }
+  .fondo-oscuro .rotulo, .fondo-oscuro .antetitulo { color: var(--c-acento); }
+  .fondo-oscuro .rotulo-num, .fondo-oscuro .titulo-seccion { color: #fff; }
+  .fondo-oscuro .titular-texto { color: rgb(255 255 255 / .78); }
+
+  /* Bandas */
+  .banda-grafito { background-color: var(--c-grafito); color: #fff; }
+  .banda-acero { background-color: var(--c-primario); color: #fff; }
+  .banda-acento { background-color: var(--c-acento); color: var(--c-sobre-acento); }
+  /* Hormigón visto: poro fino + juntas de encofrado + berenjenos (los agujeros de los latiguillos) */
+  .hormigon {
+    background-color: var(--c-hormigon);
+    background-image:
+      radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--c-texto) 16%, transparent) 0 3px, transparent 3.6px),
+      linear-gradient(90deg, color-mix(in srgb, var(--c-texto) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--c-texto) 7%, transparent) 1px, transparent 1px),
+      radial-gradient(color-mix(in srgb, var(--c-texto) 6%, transparent) 1px, transparent 1.3px);
+    background-size: 240px 120px, 240px 120px, 240px 120px, 9px 9px;
+    background-position: 0 0, -120px 0, 0 -60px, 0 0;
+  }
+  .hormigon-oscuro {
+    background-image:
+      radial-gradient(circle at 50% 50%, rgb(0 0 0 / .28) 0 3px, transparent 3.6px),
+      linear-gradient(90deg, rgb(255 255 255 / .05) 1px, transparent 1px),
+      linear-gradient(0deg, rgb(255 255 255 / .05) 1px, transparent 1px);
+    background-size: 240px 120px, 240px 120px, 240px 120px;
+    background-position: 0 0, -120px 0, 0 -60px;
+  }
+
+  /* Botones macizos: esquinas vivas, mayúsculas, sombra de bloque al pasar */
+  .btn, .btn-sec, .btn-acento { border-radius: 0; min-height: 3.25rem; padding: .85rem 1.5rem; font-size: .9rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+  .btn { background: var(--c-primario); color: #fff; border: 2px solid var(--c-primario); }
+  .btn:hover { box-shadow: 5px 5px 0 var(--c-acento); transform: translate(-2px, -2px); }
+  .btn-acento { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; line-height: 1.2; text-decoration: none; cursor: pointer; text-align: center; background: var(--c-acento); color: var(--c-sobre-acento); border: 2px solid var(--c-acento); }
+  .btn-acento:hover { box-shadow: 5px 5px 0 color-mix(in srgb, var(--c-acento) 45%, #000); transform: translate(-2px, -2px); }
+  .btn-sec { border: 2px solid currentColor; background: transparent; }
+  .btn-sec:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+  .btn .flecha, .btn-acento .flecha, .btn-sec .flecha { transition: transform .15s ease; }
+  .btn:hover .flecha, .btn-acento:hover .flecha, .btn-sec:hover .flecha { transform: translateX(3px); }
+
+  /* Cabecera grafito fija a todo el ancho */
+  .cabecera--obra { position: sticky; top: 0; background: var(--c-grafito); color: #fff; border-bottom: 4px solid var(--c-acento); }
+  .cabecera--obra .contenedor { max-width: none; }
+  @media (min-width: 1024px) { .cabecera--obra .contenedor { padding-inline: 2.5rem; } }
+  .cabecera--obra .cabecera-fila { min-height: 4.5rem; gap: .75rem; }
+  .cabecera--obra .marca-inicial { display: grid; place-items: center; flex: none; width: 2.6rem; height: 2.6rem; background: var(--c-acento); color: var(--c-sobre-acento); font-family: var(--fuente-titulos); font-weight: 900; font-size: 1.3rem; box-shadow: inset 0 -6px 0 rgb(0 0 0 / .18); }
+  .cabecera--obra .marca-nombre { font-family: var(--fuente-titulos); font-weight: 900; font-size: 1rem; letter-spacing: -0.01em; text-transform: uppercase; }
+  .cabecera--obra .cabecera-nav { gap: 1.75rem; }
+  .cabecera--obra .cabecera-nav a { font-family: var(--fuente-tecnica); font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding-block: .5rem; border-bottom: 2px solid transparent; color: rgb(255 255 255 / .85); }
+  .cabecera--obra .cabecera-nav a:hover { color: #fff; border-color: var(--c-acento); }
+  .cabecera-telefono { display: inline-flex; align-items: center; gap: .5rem; flex: none; min-height: 2.75rem; text-decoration: none; font-family: var(--fuente-tecnica); font-weight: 700; white-space: nowrap; }
+  .cabecera-telefono-icono { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid rgb(255 255 255 / .25); color: var(--c-acento); }
+  .cabecera-telefono-numero { display: none; }
+  @media (min-width: 640px) { .cabecera-telefono-numero { display: inline; } .cabecera-telefono-icono { width: auto; height: auto; border: 0; } }
+  @media (min-width: 900px) and (max-width: 1179px) { .cabecera--obra .cabecera-nav { gap: 1.1rem; } .cabecera-telefono-numero { display: none; } .cabecera-telefono-icono { width: 2.75rem; height: 2.75rem; border: 1px solid rgb(255 255 255 / .25); } }
+  .cabecera--obra .cabecera-cta { min-height: 2.75rem; padding: .6rem 1.1rem; font-size: .8rem; }
+  .cabecera--obra .menu-movil summary { min-height: 2.75rem; padding: .5rem .85rem; border: 1px solid rgb(255 255 255 / .3); font-family: var(--fuente-tecnica); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; }
+  .cabecera--obra .menu-movil-panel { background: var(--c-grafito); color: #fff; padding: .5rem 1rem 1.25rem; border-bottom: 4px solid var(--c-acento); box-shadow: 0 24px 40px rgb(0 0 0 / .35); }
+  .cabecera--obra .menu-movil-panel a { min-height: 3rem; display: flex; align-items: center; font-family: var(--fuente-titulos); font-weight: 900; font-size: 1.35rem; text-transform: uppercase; letter-spacing: -0.01em; border-bottom-color: rgb(255 255 255 / .12); }
+  .cabecera--obra .menu-movil-panel .btn-acento { margin-top: 1rem; font-family: var(--fuente-texto); font-size: .9rem; border-bottom: 2px solid var(--c-acento); }
+
+  /* Etiqueta de estado (promociones) y datos técnicos */
+  .estado { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .75rem; font-family: var(--fuente-tecnica); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--c-grafito); color: #fff; }
+  .estado::before { content: ""; width: .5rem; height: .5rem; background: var(--c-acento); }
+  .estado--disponible { background: var(--c-acento); color: var(--c-sobre-acento); }
+  .estado--disponible::before { background: currentColor; }
+  .dato-tecnico { font-family: var(--fuente-tecnica); font-size: .85rem; letter-spacing: .04em; }
+  .icono-bloque { display: grid; place-items: center; flex: none; width: 3.25rem; height: 3.25rem; background: var(--c-primario); color: #fff; box-shadow: 6px 6px 0 var(--c-acento); }
+
+  /* Pie grafito con columnas */
+  .pie--obra { background: var(--c-grafito); color: rgb(255 255 255 / .82); padding-top: 4.5rem; }
+  .pie--obra .contenedor { max-width: var(--ancho); }
+  .pie--obra .pie-rejilla { gap: 2.5rem; }
+  @media (min-width: 768px) { .pie--obra .pie-rejilla { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; } }
+  .pie--obra .pie-nombre { color: #fff; font-family: var(--fuente-titulos); font-weight: 900; font-size: 1.6rem; line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase; }
+  .pie--obra .pie-titulo { font-family: var(--fuente-tecnica); color: var(--c-acento); opacity: 1; font-weight: 600; letter-spacing: .14em; }
+  .pie--obra .pie-redes a { border: 1px solid rgb(255 255 255 / .25); min-width: 2.75rem; min-height: 2.75rem; align-items: center; justify-content: center; }
+  .pie--obra .pie-legal { font-family: var(--fuente-tecnica); font-size: .78rem; letter-spacing: .04em; }
+  .pie-zocalo { height: .75rem; background: linear-gradient(90deg, var(--c-acento) 0 33.33%, var(--c-primario) 33.33% 66.66%, var(--c-hormigon-2) 66.66%); }
+
+  /* Formulario */
+  .formulario .campo label { font-family: var(--fuente-tecnica); font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+  .formulario .campo input, .formulario .campo textarea, .formulario .campo select { min-height: 3rem; background: #fff; color: #16191d; border: 2px solid transparent; border-radius: 0; }
+  .formulario .campo input:focus, .formulario .campo textarea:focus, .formulario .campo select:focus { border-color: var(--c-acento); outline: none; }
+  .campo select { width: 100%; font: inherit; padding: .7rem .85rem; }
+  .formulario-doble { display: grid; gap: 1rem; }
+  @media (min-width: 560px) { .formulario-doble { grid-template-columns: 1fr 1fr; } }
+  .formulario .campo-check a { text-decoration: underline; }
+}

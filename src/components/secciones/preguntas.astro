@@ -1,0 +1,43 @@
+---
+// Preguntas frecuentes: banda blanca; titular fijo a la izquierda en escritorio y acordeón nativo <details> a la
+// derecha con filetes gruesos y un bloque «+» de acero, sin JavaScript. Campos: preguntas[] {pregunta, respuesta}.
+// Sin preguntas no se pinta. También sirve de diseño para apartados nuevos (`tipo: preguntas`).
+import { seccion, numeroSeccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const preguntas = s ? s.preguntas.filter((p) => p && p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <section id={id} class="bg-fondo">
+      <div class="contenedor grid gap-10 py-[var(--ritmo)] md:py-[var(--ritmo-md)] lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <Titular class="mb-0 lg:sticky lg:top-28" numero={numeroSeccion(id)} antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        </div>
+        <div class="border-b-2 border-texto lg:col-span-7">
+          {preguntas.map((p, i) => (
+            <details class="faq border-t-2 border-texto" open={i === 0}>
+              <summary class="flex items-center justify-between gap-6 py-6 font-display text-lg font-black leading-tight tracking-tight md:text-2xl">
+                {p.pregunta}
+                <span class="faq-signo" aria-hidden="true"><span>+</span></span>
+              </summary>
+              {p.respuesta && <p class="max-w-2xl pb-7 text-lg text-[var(--c-tenue)]">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .faq summary { list-style: none; cursor: pointer; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq-signo { display: grid; place-items: center; flex: none; width: 2.75rem; height: 2.75rem; background: var(--c-primario); color: #fff; font-family: var(--fuente-texto); font-size: 1.6rem; font-weight: 400; }
+  .faq-signo span { display: block; transition: transform 0.2s ease; }
+  .faq[open] .faq-signo { background: var(--c-acento); color: var(--c-sobre-acento); }
+  .faq[open] .faq-signo span { transform: rotate(45deg); }
+</style>

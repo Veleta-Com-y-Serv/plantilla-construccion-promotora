@@ -1,0 +1,104 @@
+---
+// Promociones: filas 50/50 a sangre en zigzag (la foto toca el borde de la ventana) con número grande,
+// estado («En construcción», «Entrega 2027», «Disponible»…), lugar, título, tipología, viviendas, precio y botón.
+// Campos: promociones[] {titulo, lugar, estado, precio, viviendas, tipologia, texto, imagen, destacado}. Lo vacío no se pinta.
+// Con `promociones: []` se ven el texto y el botón (cta) en una franja de hormigón, sin filas.
+import { seccion, numeroSeccion, clave } from '../../data/site';
+import type { Promocion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const lista: Promocion[] = s ? s.promociones.filter((p) => p.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class="promos bg-fondo">
+      <Seccion as="div" class="!pb-0">
+        <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+          <Titular class="mb-0 lg:col-span-7" numero={numeroSeccion(id)} antetitulo={s.antetitulo} titulo={s.titulo} />
+          {lista.length > 0 && s.texto && <p class="titular-texto mt-0 lg:col-span-5 lg:pb-2">{s.texto}</p>}
+        </div>
+      </Seccion>
+
+      {lista.length > 0 ? (
+        <div class="mt-12 md:mt-16">
+          {lista.map((p, i) => (
+            <article class:list={['promo grid lg:grid-cols-2', i % 2 === 1 && 'promo--inversa']}>
+              <div class="promo-foto relative min-h-[16rem] overflow-hidden bg-[var(--c-hormigon-2)] sm:min-h-[24rem] lg:min-h-[36rem]">
+                <Imagen src={p.imagen || '/placeholders/obra.svg'} alt={p.titulo} ancho={1200} alto={900} respaldo="/placeholders/obra.svg" class="absolute inset-0 h-full w-full object-cover" />
+                {p.estado && <span class:list={['estado absolute left-4 top-4 md:left-6 md:top-6', `estado--${clave(p.estado)}`]}>{p.estado}</span>}
+              </div>
+              <div class:list={['promo-texto relative flex items-center px-4 py-12 sm:px-8 md:py-16 lg:px-16', i % 2 === 1 ? 'hormigon' : 'bg-fondo']}>
+                <div class="relative w-full max-w-[38rem]">
+                  <p class="promo-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+                  {p.lugar && (
+                    <p class="dato-tecnico relative flex items-center gap-2 uppercase text-[var(--c-acento-texto)]">
+                      <Icono nombre="mapa" tam={16} class="shrink-0" />
+                      {p.lugar}
+                    </p>
+                  )}
+                  <h3 class="relative mt-3 flex items-start gap-3 text-[clamp(1.9rem,3.6vw,3.25rem)]">
+                    <span class="min-w-0">{p.titulo}</span>
+                    {p.destacado && (
+                      <span class="mt-1 grid h-9 w-9 shrink-0 place-items-center bg-acento text-[var(--c-sobre-acento)]" title="Destacada">
+                        <Icono nombre="estrella" tam={18} />
+                        <span class="sr-only">Destacada</span>
+                      </span>
+                    )}
+                  </h3>
+                  {p.texto && <p class="relative mt-5 text-lg text-[var(--c-tenue)]">{p.texto}</p>}
+                  {(p.viviendas || p.tipologia) && (
+                    <ul class="mt-8 grid border-y-2 border-texto sm:grid-cols-2">
+                      {p.viviendas && (
+                        <li class="flex items-center gap-3 py-4 font-semibold sm:pr-4">
+                          <Icono nombre="edificio" tam={22} class="shrink-0 text-[var(--c-acento-texto)]" />
+                          {p.viviendas}
+                        </li>
+                      )}
+                      {p.tipologia && (
+                        <li class="promo-tipo flex items-center gap-3 py-4 font-semibold">
+                          <Icono nombre="plano" tam={22} class="shrink-0 text-[var(--c-acento-texto)]" />
+                          {p.tipologia}
+                        </li>
+                      )}
+                    </ul>
+                  )}
+                  {(p.precio || s.cta?.url) && (
+                    <div class="mt-8 flex flex-wrap items-center justify-between gap-6">
+                      {p.precio && <p class="font-display text-[clamp(1.6rem,2.6vw,2.25rem)] font-black tracking-tight text-primario">{p.precio}</p>}
+                      {s.cta?.url && <a class="btn" href={s.cta.url}>{s.cta.texto}<Icono nombre="flecha" tam={18} class="flecha" /></a>}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="hormigon mt-12">
+          <div class="contenedor flex flex-col gap-6 py-10 sm:flex-row sm:items-center">
+            <span class="icono-bloque"><Icono nombre="edificio" tam={24} /></span>
+            {s.texto && <p class="flex-1 text-lg font-semibold">{s.texto}</p>}
+            {s.cta?.url && <a class="btn shrink-0" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .promo + .promo { border-top: 1px solid var(--c-borde); }
+  @media (min-width: 1024px) {
+    .promo--inversa .promo-foto { order: 2; }
+    .promo--inversa .promo-texto { justify-content: flex-end; }
+  }
+  .promo-num { margin-bottom: 1.25rem; font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(3.75rem, 6.5vw, 6.5rem); line-height: .85; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 2px var(--c-primario); }
+  @media (min-width: 640px) { .promo-tipo { border-left: 1px solid var(--c-borde); padding-left: 1rem; } }
+  @media (max-width: 639px) { .promo-tipo { border-top: 1px solid var(--c-borde); } }
+</style>
