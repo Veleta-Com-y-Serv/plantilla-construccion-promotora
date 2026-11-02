@@ -54,9 +54,57 @@ secciones:
     texto: Pisos y pareados que construimos nosotros, con memoria de calidades cerrada desde el primer día. Visita la obra con cita.
     cta: { texto: Pedir información, url: "/#contacto" }
     promociones:
-      - { titulo: Residencial Ribera de Moreras, lugar: "Valladolid · Las Moreras", estado: En construcción, precio: "Desde 214.000 €", viviendas: 36 viviendas, tipologia: "2 y 3 dormitorios con garaje y trastero", texto: "A dos minutos del Pisuerga. Aerotermia, suelo radiante y piscina comunitaria.", imagen: /fotos/promocion-moreras.jpg, destacado: true }
-      - { titulo: Jardines de Covaresa, lugar: "Valladolid · Covaresa", estado: Entrega 2027, precio: "Desde 289.000 €", viviendas: 18 viviendas, tipologia: Pareados de 4 dormitorios con parcela, texto: "Dos plantas y bajo cubierta, jardín privado y cargador para coche eléctrico.", imagen: /fotos/promocion-covaresa.jpg, destacado: false }
-      - { titulo: Edificio Arroyo Centro, lugar: Arroyo de la Encomienda, estado: Disponible, precio: "Desde 176.000 €", viviendas: 24 viviendas, tipologia: "1 a 3 dormitorios con terraza", texto: "Terminado y con licencia de primera ocupación. Quedan pocas viviendas, visita el piso piloto.", imagen: /fotos/promocion-arroyo.jpg, destacado: false }
+      - titulo: Residencial Ribera de Moreras
+        lugar: "Valladolid · Las Moreras"
+        estado: En construcción
+        precio: "Desde 214.000 €"
+        viviendas: 36 viviendas
+        tipologia: "2 y 3 dormitorios con garaje y trastero"
+        texto: "A dos minutos del Pisuerga. Aerotermia, suelo radiante y piscina comunitaria."
+        imagen: /fotos/promocion-moreras.jpg
+        destacado: true
+        detalle: |
+          Ribera de Moreras es nuestra promoción más cercana al río: un edificio de viviendas de dos y tres dormitorios, todas con garaje y trastero, en un barrio con colegios, parques y paseo junto al Pisuerga. Lo estamos construyendo con nuestro propio equipo, de modo que quien te enseña la obra es quien la dirige.
+
+          La memoria de calidades está cerrada desde el primer día. La calefacción y el agua caliente funcionan con aerotermia y suelo radiante, la envolvente lleva aislamiento reforzado en fachada y cubierta, y las ventanas son de carpintería con rotura de puente térmico. El resultado es una vivienda que se calienta con poco y se mantiene fresca en verano.
+
+          Las zonas comunes incluyen la piscina comunitaria, un jardín interior y un portal amplio con buzones y espacio para bicicletas. Los acabados de suelos, cocina y baños se pueden elegir entre varias opciones sin coste; lo que quieras añadir se presupuesta aparte.
+
+          Las cantidades que entregas a cuenta van a una cuenta especial con aval bancario, como marca la ley. Con cita visitas la obra, ves el avance con fotos de cada fase y conoces la vivienda que mejor encaja con tu familia.
+      - titulo: Jardines de Covaresa
+        lugar: "Valladolid · Covaresa"
+        estado: Entrega 2027
+        precio: "Desde 289.000 €"
+        viviendas: 18 viviendas
+        tipologia: Pareados de 4 dormitorios con parcela
+        texto: "Dos plantas y bajo cubierta, jardín privado y cargador para coche eléctrico."
+        imagen: /fotos/promocion-covaresa.jpg
+        destacado: false
+        detalle: |
+          Jardines de Covaresa reúne pareados de cuatro dormitorios pensados para familias que quieren espacio, luz y jardín sin salir de la ciudad. Cada casa se levanta en dos plantas y bajo cubierta, con parcela privada, y está orientada para aprovechar el sol de mañana en la zona de día.
+
+          En la planta baja se encuentran el salón con salida directa al jardín, la cocina abierta y un aseo de cortesía. Arriba están los dormitorios y los baños, y bajo cubierta queda un espacio versátil que puede servir de despacho, sala de juegos o habitación de invitados. Todas las casas llevan garaje y toma preparada para un cargador de coche eléctrico.
+
+          La construcción combina estructura de hormigón con cerramientos muy aislados, aerotermia y ventilación con recuperación de calor, para que el aire se renueve sin perder temperatura. Los espacios exteriores se entregan con pavimento y cierres ya terminados.
+
+          Se vende sobre plano con aval y con todas las condiciones por escrito. Si quieres, te enseñamos la parcela, el plano de tu casa y la memoria de calidades, y te explicamos el calendario de obra hasta la entrega.
+      - titulo: Edificio Arroyo Centro
+        lugar: Arroyo de la Encomienda
+        estado: Disponible
+        precio: "Desde 176.000 €"
+        viviendas: 24 viviendas
+        tipologia: "1 a 3 dormitorios con terraza"
+        texto: "Terminado y con licencia de primera ocupación. Quedan pocas viviendas, visita el piso piloto."
+        imagen: /fotos/promocion-arroyo.jpg
+        destacado: false
+        detalle: |
+          Arroyo Centro es un edificio ya terminado en el centro de Arroyo de la Encomienda, con viviendas de uno a tres dormitorios y terraza. Tiene licencia de primera ocupación, así que puedes comprar con la obra a la vista y mudarte en cuanto se firmen las escrituras, sin esperas ni sorpresas.
+
+          Las viviendas son luminosas y funcionales, con cocinas equipadas, armarios empotrados y baños completos. Las terrazas permiten comer fuera buena parte del año, y las más pequeñas son una buena opción para una primera vivienda o para quien busca una casa cómoda y fácil de mantener.
+
+          El edificio cuenta con ascensor, portal accesible y zonas comunes cuidadas. Está a un paso de comercios, colegios y transporte hacia Valladolid, de modo que el día a día se resuelve a pie.
+
+          Quedan pocas viviendas. Puedes visitar el piso piloto con cita, comprobar los acabados con tus propios ojos y pedir los planos de las que siguen disponibles. Te explicamos la forma de pago, los gastos de la compraventa y la garantía que cubre cada parte de la vivienda.
 
   servicios:
     activa: true

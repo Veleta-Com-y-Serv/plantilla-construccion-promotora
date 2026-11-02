@@ -64,3 +64,8 @@ y rediseñada entera. Este fichero se queda en el repo: es lo que lee quien (per
 - [ ] Fotos generadas y previews definitivas (paso de fotos; las de ahora son provisionales con placeholders).
 - [ ] Repo `Veleta-Com-y-Serv/plantilla-construccion-promotora` con la etiqueta `v1.0.0`; en la plataforma,
   `config/plantillas.php` (`repos` y `refs`) y `php artisan plantillas:sync --demos`.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.

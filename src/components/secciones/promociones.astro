@@ -2,6 +2,7 @@
 // Promociones: filas 50/50 a sangre en zigzag (la foto toca el borde de la ventana) con número grande,
 // estado («En construcción», «Entrega 2027», «Disponible»…), lugar, título, tipología, viviendas, precio y botón.
 // Campos: promociones[] {titulo, lugar, estado, precio, viviendas, tipologia, texto, imagen, destacado}. Lo vacío no se pinta.
+// Las promociones con `detalle` tienen página propia (/promociones/<slug>/, src/pages/[coleccion]/[slug].astro): el título enlaza y la fila entera es clicable.
 // Con `promociones: []` se ven el texto y el botón (cta) en una franja de hormigón, sin filas.
 import { seccion, numeroSeccion, clave } from '../../data/site';
 import type { Promocion } from '../../data/site';
@@ -9,6 +10,7 @@ import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
+import { enlaceDe } from '../../lib/paginas';
 interface Props { id: string }
 const { id } = Astro.props;
 const s = seccion(id);
@@ -28,7 +30,7 @@ const lista: Promocion[] = s ? s.promociones.filter((p) => p.titulo) : [];
       {lista.length > 0 ? (
         <div class="mt-12 md:mt-16">
           {lista.map((p, i) => (
-            <article class:list={['promo grid lg:grid-cols-2', i % 2 === 1 && 'promo--inversa']}>
+            <article class:list={['promo relative grid lg:grid-cols-2', i % 2 === 1 && 'promo--inversa']}>
               <div class="promo-foto relative min-h-[16rem] overflow-hidden bg-[var(--c-hormigon-2)] sm:min-h-[24rem] lg:min-h-[36rem]">
                 <Imagen src={p.imagen || '/placeholders/obra.svg'} alt={p.titulo} ancho={1200} alto={900} respaldo="/placeholders/obra.svg" class="absolute inset-0 h-full w-full object-cover" />
                 {p.estado && <span class:list={['estado absolute left-4 top-4 md:left-6 md:top-6', `estado--${clave(p.estado)}`]}>{p.estado}</span>}
@@ -43,7 +45,7 @@ const lista: Promocion[] = s ? s.promociones.filter((p) => p.titulo) : [];
                     </p>
                   )}
                   <h3 class="relative mt-3 flex items-start gap-3 text-[clamp(1.9rem,3.6vw,3.25rem)]">
-                    <span class="min-w-0">{p.titulo}</span>
+                    <span class="min-w-0">{enlaceDe(p) ? <a href={enlaceDe(p)} class="promo-enlace">{p.titulo}</a> : p.titulo}</span>
                     {p.destacado && (
                       <span class="mt-1 grid h-9 w-9 shrink-0 place-items-center bg-acento text-[var(--c-sobre-acento)]" title="Destacada">
                         <Icono nombre="estrella" tam={18} />
@@ -71,7 +73,8 @@ const lista: Promocion[] = s ? s.promociones.filter((p) => p.titulo) : [];
                   {(p.precio || s.cta?.url) && (
                     <div class="mt-8 flex flex-wrap items-center justify-between gap-6">
                       {p.precio && <p class="font-display text-[clamp(1.6rem,2.6vw,2.25rem)] font-black tracking-tight text-primario">{p.precio}</p>}
-                      {s.cta?.url && <a class="btn" href={s.cta.url}>{s.cta.texto}<Icono nombre="flecha" tam={18} class="flecha" /></a>}
+                      {enlaceDe(p) && <span class="promo-ver dato-tecnico uppercase" aria-hidden="true">Ver ficha <Icono nombre="flecha" tam={16} /></span>}
+                      {s.cta?.url && <a class="btn relative z-10" href={s.cta.url}>{s.cta.texto}<Icono nombre="flecha" tam={18} class="flecha" /></a>}
                     </div>
                   )}
                 </div>
@@ -93,6 +96,11 @@ const lista: Promocion[] = s ? s.promociones.filter((p) => p.titulo) : [];
 }
 
 <style>
+  .promo-enlace { color: inherit; text-decoration: none; }
+  .promo-enlace::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+  .promo-enlace:focus-visible { outline: none; }
+  .promo:has(.promo-enlace:focus-visible) { outline: 3px solid var(--c-acento); outline-offset: -3px; }
+  .promo-ver { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; color: var(--c-acento-texto); }
   .promo + .promo { border-top: 1px solid var(--c-borde); }
   @media (min-width: 1024px) {
     .promo--inversa .promo-foto { order: 2; }
