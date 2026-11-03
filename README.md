@@ -7,6 +7,7 @@ Web rotunda para constructoras y promotoras, con promociones en venta, obra term
 - Campos propios: `hero.items[]` (titulo, texto, url), `promociones[]` (titulo, lugar, estado, precio, viviendas, tipologia, texto, imagen, destacado), `servicios.imagen`, `trabajos[]` (titulo, lugar, anio, categoria, texto, imagen), `cta` (imagen, cta, cta_secundario), `contacto.opciones`.
 - Diseño a ancho completo: bandas a sangre (grafito, hormigón visto, acero, acento), hero casi a pantalla completa, promociones en zigzag 50/50, mosaico de obra de borde a borde, cifras gigantes. Brief en `DISEÑO.md`.
 - SEO de base incluido (`src/lib/seo.ts`): canónica, og:image, JSON-LD del negocio (`GeneralContractor`) y de las preguntas frecuentes, `robots.txt`, `sitemap.xml` y `llms.txt`; `noindex` si `seo.indexable: false`.
+- Varias páginas (opcional, `paginas:` en la raíz de `site.yaml`): Inicio + una página por entrada (`{ ruta, titulo, secciones: "a; b" }`, hasta 6) con el menú hecho solo; reparto recomendado en `template.yaml → paginas`. Sin la clave, una sola página larga.
 - Contenido editable en `site.yaml`; metadatos y guion del asistente en `template.yaml`; reglas para el agente en `CLAUDE.md`; fotos a generar en `fotos.json`.
 
 ```
