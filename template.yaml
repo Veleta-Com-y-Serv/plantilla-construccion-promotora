@@ -21,7 +21,7 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: solido
 plan_minimo: presencia
-version: 1.2.0
+version: 1.2.1
 base: astrowind
 demo_url: https://demo-plantilla-construccion-promotora.noexpertise.com
 activa: true

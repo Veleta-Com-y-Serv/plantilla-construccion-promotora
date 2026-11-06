@@ -42,7 +42,7 @@ Cada sección es un componente que solo se pinta si `site.yaml → secciones.<id
 - `cifras.items[]`: `{ titulo = la cifra, texto }`. Nunca inventes cifras.
 - `proceso.items[]`: `{ titulo, texto, icono }`; `proceso.cta` opcional.
 - `cta`: `antetitulo`, `titulo`, `texto`, `imagen` (opcional), `cta`, `cta_secundario`.
-- `contacto.opciones`: cadena con valores separados por «;» para el desplegable «Me interesa». Vacía = títulos de `hero.items`.
+- `contacto.opciones`: cadena con valores separados por «;» para el desplegable «Me interesa». Vacía = sin desplegable.
 - Iconos disponibles: ver `src/components/ui/Icono.astro` (edificio, grua, casco, ladrillos, nivel, plano, lupa, escudo, llave, herramienta, casa…).
 
 ## Reglas para órdenes
